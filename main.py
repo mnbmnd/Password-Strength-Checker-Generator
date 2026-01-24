@@ -1,3 +1,10 @@
+########################################################
+# Author: Muneeb Mennad                                #
+# Project Name: Password Strength Checker              #
+# Date: 2026-01-24                                     #
+# Github Username: pchstpch                            #
+########################################################
+
 import math
 import string
 import entropy
@@ -12,4 +19,10 @@ if __name__ == "__main__":
     print("Numeric count: " + str(entropy.getNumericCount(userPassword)))
     print("Symbols count: " + str(entropy.getSymbolsCount(userPassword)))
     print("Space count: " + str(entropy.getSpaceCount(userPassword)))
+    
+    print("Entropy: " + str(entropy.getEntropy(userPassword)))
+    
+    
+    
 # end main
+# WIP

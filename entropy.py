@@ -1,48 +1,72 @@
 import string
 import math
 
-"""
-This file checks the strengths of a user's password.
-Conditions are set against the time it takes for a hacker to brute force your password
-"""
+LOWERCASE = 26
+UPPERCASE = 26
+NUMERICAL = 10
+SYMBOLS = 32
+SPACE = 1
 
-def getSize(userPassword):
-    return len(userPassword)
+def getSize(password):
+    return len(password)
 
-def getUppercaseCount(userPassword):
+def getUppercaseCount(password):
     upperCount = 0
-    for i in userPassword:
+    for i in password:
         if (i.isupper()):
             upperCount += 1
     return upperCount
             
-def getLowercaseCount(userPassword):
+def getLowercaseCount(password):
     lowerCount = 0
-    for i in userPassword:
+    for i in password:
         if (i.islower()):
             lowerCount += 1
     return lowerCount
     
-def getNumericCount(userPassword):
+def getNumericCount(password):
     numericCount = 0
-    for i in userPassword:
+    for i in password:
         if (i.isnumeric()):
             numericCount += 1
     return numericCount
 
-def getSymbolsCount(userPassword):
+def getSymbolsCount(password):
     symbols = list(string.punctuation)
     symbolsCount = 0
-    for i in userPassword:
+    for i in password:
         if i in symbols:
             symbolsCount += 1
     return symbolsCount
 
-def getSpaceCount(userPassword):
+def getSpaceCount(password):
     spaceCount = 0
-    for i in userPassword:
+    for i in password:
         if i == " ":
             spaceCount += 1
     return spaceCount
 
-#TODO: create a function that evaluates if it matches a name, character, product, or organization.
+def getEntropy(password):
+    r = 0
+    if getLowercaseCount(password):
+        r += LOWERCASE
+    
+    if getUppercaseCount(password):
+        r += UPPERCASE
+    
+    if getNumericCount(password):
+        r += NUMERICAL
+    
+    if getSymbolsCount(password):
+        r += SYMBOLS
+    
+    if getSpaceCount(password):
+        r += SPACE
+        
+    e = math.log2(r**getSize(password))
+    
+    return e
+    
+        
+
+# WIP
