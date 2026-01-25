@@ -1,3 +1,12 @@
+########################################################
+# Author: Muneeb Mennad                                #
+# Project Name: Password Strength Checker              #
+# File Name: main.py                                   #
+# Date: 2026-01-24                                     #
+# Github Username: pchstpch                            #
+########################################################
+
+
 import string
 import math
 
@@ -6,6 +15,10 @@ UPPERCASE = 26
 NUMERICAL = 10
 SYMBOLS = 32
 SPACE = 1
+
+BCRYPT_COST = 12
+GUESSES_PER_SEC = 1e5
+SECONDS_PER_YEAR = 6.308*(10**7)
 
 def getSize(password):
     return len(password)
@@ -46,27 +59,47 @@ def getSpaceCount(password):
             spaceCount += 1
     return spaceCount
 
-def getEntropy(password):
-    r = 0
+def getCharactersAvailable(password):
+    characters = 0
     if getLowercaseCount(password):
-        r += LOWERCASE
+        characters += LOWERCASE
     
     if getUppercaseCount(password):
-        r += UPPERCASE
+        characters += UPPERCASE
     
     if getNumericCount(password):
-        r += NUMERICAL
+        characters += NUMERICAL
     
     if getSymbolsCount(password):
-        r += SYMBOLS
+        characters += SYMBOLS
     
     if getSpaceCount(password):
-        r += SPACE
+        characters += SPACE
         
-    e = math.log2(r**getSize(password))
-    
-    return e
-    
-        
+    return characters
 
+def getEntropy(password):
+    passwordLength = getSize(password)
+    r = getCharactersAvailable(password)
+    entropy = math.log2(r**passwordLength)
+    
+    return entropy
+
+
+def getSampleSpaceSize(password):
+    charactersAvailable = getCharactersAvailable(password)
+    n = getSize(password)
+    sampleSpaceSize = charactersAvailable**n
+    return sampleSpaceSize
+    
+def getAttemptsPerSecond():
+    #function expands on attempts per second
+    pass
+
+def getTimeToCrack(password):
+    sampleSpace = getSampleSpaceSize(password)
+    timeToCrack = sampleSpace/(GUESSES_PER_SEC*SECONDS_PER_YEAR)
+    return timeToCrack
+    
+        
 # WIP

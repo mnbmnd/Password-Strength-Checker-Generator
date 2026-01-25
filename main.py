@@ -1,14 +1,16 @@
 ########################################################
 # Author: Muneeb Mennad                                #
 # Project Name: Password Strength Checker              #
+# File Name: main.py                                   #
 # Date: 2026-01-24                                     #
 # Github Username: pchstpch                            #
 ########################################################
 
-import math
-import string
+
+# import math
+# import string
 import entropy
-import password_generator
+# import password_generator
 
 if __name__ == "__main__":
     print("PASSWORD STRENGTH CHECKER")
@@ -20,7 +22,8 @@ if __name__ == "__main__":
     print("Symbols count: " + str(entropy.getSymbolsCount(userPassword)))
     print("Space count: " + str(entropy.getSpaceCount(userPassword)))
     
-    print("Entropy: " + str(entropy.getEntropy(userPassword)))
+    print("Entropy: {:.1f}".format(entropy.getEntropy(userPassword)))
+    print("Time to crack (in years): {:.1f}".format(entropy.getTimeToCrack(userPassword)))
     
     
     
