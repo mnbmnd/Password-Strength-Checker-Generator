@@ -11,7 +11,7 @@
 - Add an option to go back to the starting menu | Done
 - Change project name to something shorter | Done
 - Fix input field for intial choosing option (Answer: ) | Done
-- Add descriptions | 
+- Add descriptions | Done
 - Add comments to code | 
 - Add an option to add symbols to random string option | 
 - Fix entropy function (asking for password twice) | Done
