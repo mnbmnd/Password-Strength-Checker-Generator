@@ -15,3 +15,5 @@ def generate_salt():
 
 def generate_hash(password, salt):
     return hashlib.pbkdf2_hmac('sha256', password.encode(), salt, 100000).hex()
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

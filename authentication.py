@@ -43,6 +43,8 @@ def set_master_credentials():
         return None
     
     salt = encrypt.generate_salt()
-    hashed_password = encrypt.generate_hash(password, salt)
+    passwordHash = encrypt.generate_hash(password, salt)
     
-    return [username, hashed_password]
+    return [username, salt.hex(), passwordHash]
+
+# ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

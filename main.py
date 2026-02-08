@@ -11,6 +11,7 @@ import entropy
 import password_generator
 import system
 import authentication
+import storage
 import getpass
 
 
@@ -167,7 +168,7 @@ def mainMenu():
     # )
     print()
     masterCredentials = authentication.set_master_credentials()
-    print(masterCredentials)
+    storage.save_master_credentials(masterCredentials[0], masterCredentials[1], masterCredentials[2])
     optionMenu()
 
 
