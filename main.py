@@ -7,12 +7,14 @@
 ##############################################################################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
+import authentication
 import entropy
 import password_generator
 import system
 import authentication
 import storage
 import getpass 
+
 
 # Sets the master password
 def create_master_credentials():
@@ -75,19 +77,42 @@ def display_generated_pass(passwordType):
     print("Your new password is: ", generatedPassword)
     display_pass_strength(generatedPassword)
 
+# Confirmation prompt to quit
+def quit_confirm(state):
+    print()
+    option = int(input("Enter 1 to confirm or 2 to go back: "))
+    if option == 1:
+        system.exit_program()
+        print("Thank you for using passman 👋")
+        exit(0) # Exit with success
+    elif option == 2:
+        if state == 1:
+            system.clear_screen()
+            overview()
+            credentials_menu()
+        elif state == 2:
+            system.clear_screen()
+            main_menu()
+    
+# The login menu
+def login_menu():
+    print("=" * 80)
+    section("Login Menu")
+    loginPassword = input("Enter your master password to continue:")
+    success = authentication.authenticate(loginPassword)
+    if success:
+        print("Login Successful")
+    else:
+        print("Login Unsuccessful")
+    return
 
-def quit_confirm():
-    input("Press enter to confirm: ")
-    system.exit_program()
-    print("Thank you for using passman 👋")
-    exit(0) # Exit with success
-
-# The first option menu presented
-def first_option_menu():
-    print("=" * 65)
+# The first option menu presented (credentials menu)
+def credentials_menu():
+    print("=" * 80)
+    section("Credentials Menu")
     print("To get started, choose an option below:\n")
     print("1. Setup/update your master password")
-    # print("2. Login with your master password")
+    print("2. Login with your master password")
     print("3. Quit")
     
     option = int(input("Answer: "))
@@ -95,12 +120,16 @@ def first_option_menu():
     if option == 1:
         masterCredentials = create_master_credentials()
         store_master_credentials(masterCredentials)
+    elif option == 2:
+        login_menu()
     elif option == 3:
-        quit_confirm()
+        quit_confirm(1)
 
 # The second option menu presented
-def second_option_menu():
-    print("=" * 65)
+def main_menu():
+    print("=" * 80)
+    section("Main Menu")
+    print()
     print("Choose an option below to continue:")
     print("1. Generate a new password")
     print("2. Check password strength")
@@ -113,12 +142,12 @@ def second_option_menu():
     elif option == 2:
         pass_checker_menu()
     elif option == 3:
-        quit_confirm()
+        quit_confirm(2)
 
 # Displays the password generator menu
 def pass_generator_menu():
     print("")
-    print("=" * 65)
+    print("=" * 80)
     print("Password Generator")
     section("Description")
     print(
@@ -148,7 +177,7 @@ def pass_generator_menu():
 # Displays the password checker menu
 def pass_checker_menu():
     print()
-    print("=" * 65)
+    print("=" * 80)
     print("Password Strength Checker")
     section("Description")
     print(
@@ -172,7 +201,7 @@ def pass_checker_menu():
     print()
     display_pass_strength()
     print()
-    second_option_menu()
+    main_menu()
 
 # Sections formatter
 def section(title: str):
@@ -189,19 +218,23 @@ def splash():
 
 # The main menu, shows after splash screen
 def overview():
+    print("=" * 80)
     section("Overview")
     print(
         "This project is a terminal-based password utility that helps\nyou both generate strong passwords and evaluate existing ones,\n"
         "it is designed to be simple to use, transparent in how it works,\nand focused on real-world security rather than gimmicks.\n"
     )
     print()
+    
+def run_program(quit_confirmation):
+    overview()
+    credentials_menu()
+    main_menu()
 
 # Main
 if __name__ == "__main__":
     splash()
-    overview()
-    first_option_menu()
-    second_option_menu()
+    run_program(quit_confirmation = None)
     
 # END_MAIN
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
