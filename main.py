@@ -17,6 +17,7 @@ import getpass
 # Sets the master password
 def create_master_credentials():
     masterCredentials = authentication.set_master_credentials()
+    
     return masterCredentials
 
 # Stores the master's username, password salt, and password hash
@@ -74,26 +75,33 @@ def display_generated_pass(passwordType):
     print("Your new password is: ", generatedPassword)
     display_pass_strength(generatedPassword)
 
+
+def quit_confirm():
+    input("Press enter to confirm: ")
+    system.exit_program()
+    print("Thank you for using passman 👋")
+    exit(0) # Exit with success
+
 # The first option menu presented
 def first_option_menu():
+    print("=" * 65)
     print("To get started, choose an option below:\n")
     print("1. Setup/update your master password")
     print("2. Login with your master password")
     print("3. Quit")
     
     option = int(input("Answer: "))
-    system.clear_screen()
     
     if option == 1:
         masterCredentials = create_master_credentials()
         store_master_credentials(masterCredentials)
-    if option == 3:
-        system.exit_program()
-    
+    elif option == 3:
+        quit_confirm()
 
 # The second option menu presented
 def second_option_menu():
-    print("Choose an option to continue:")
+    print("=" * 65)
+    print("Choose an option below to continue:")
     print("1. Generate a new password")
     print("2. Check password strength")
     print("3. Quit")
@@ -104,13 +112,37 @@ def second_option_menu():
         pass_generator_menu()
     elif option == 2:
         pass_checker_menu()
-    else:
-        system.exit_program()
-        
+    elif option == 3:
+        quit_confirm()
+
+# Displays the password generator menu
+def pass_generator_menu():
+    print("")
+    print("=" * 65)
+    print("Password Generator")
+    section("Description")
+    print(
+        "The Password Generator creates new passwords for you using secure randomness."
+    )
+    print()
+    print("You can choose between:")
+    print(
+        "1. Passphrase – a sequence of randomly selected words that balances security and memorability"
+    )
+    print("Example: swell posing gruffly slander onto")
+    print()
+    print(
+        "2. Alphanumeric password – a fully random string of letters and numbers, with an optional \nsymbols setting for additional complexity."
+    )
+    print("Example: a9Fq7XrL2mP8ZKcE")
+    print()
+    display_generated_pass(password_type())
+    print()
+
 # Displays the password checker menu
 def pass_checker_menu():
     print()
-    print("=" * 18)
+    print("=" * 65)
     print("Password Strength Checker")
     section("Description")
     print(
@@ -136,30 +168,6 @@ def pass_checker_menu():
     print()
     second_option_menu()
 
-# Displays the password generator menu
-def pass_generator_menu():
-    print("")
-    print("=" * 18)
-    print("Password Generator")
-    section("Description")
-    print(
-        "The Password Generator creates new passwords for you using secure randomness."
-    )
-    print()
-    print("You can choose between:")
-    print(
-        "1. Passphrase – a sequence of randomly selected words that balances security and memorability"
-    )
-    print("Example: swell posing gruffly slander onto")
-    print()
-    print(
-        "2. Alphanumeric password – a fully random string of letters and numbers, with an optional \nsymbols setting for additional complexity."
-    )
-    print("Example: a9Fq7XrL2mP8ZKcE")
-    print()
-    display_generated_pass(password_type())
-    print()
-
 # Sections formatter
 def section(title: str):
     print()
@@ -174,19 +182,20 @@ def splash():
     system.clear_screen()
 
 # The main menu, shows after splash screen
-def main_menu():
+def overview():
     section("Overview")
     print(
         "This project is a terminal-based password utility that helps\nyou both generate strong passwords and evaluate existing ones,\n"
         "it is designed to be simple to use, transparent in how it works,\nand focused on real-world security rather than gimmicks.\n"
     )
     print()
-    first_option_menu()
-    # second_option_menu()
 
 # Main
 if __name__ == "__main__":
     splash()
-    main_menu()
+    overview()
+    first_option_menu()
+    second_option_menu()
+    
 # END_MAIN
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
