@@ -12,7 +12,7 @@ import password_generator
 import system
 import authentication
 import storage
-import getpass
+import getpass 
 
 # Sets the master password
 def create_master_credentials():
@@ -87,7 +87,7 @@ def first_option_menu():
     print("=" * 65)
     print("To get started, choose an option below:\n")
     print("1. Setup/update your master password")
-    print("2. Login with your master password")
+    # print("2. Login with your master password")
     print("3. Quit")
     
     option = int(input("Answer: "))
@@ -126,15 +126,21 @@ def pass_generator_menu():
     )
     print()
     print("You can choose between:")
+    # \033[1m\033[0m makes text bold
     print(
-        "1. Passphrase – a sequence of randomly selected words that balances security and memorability"
+        "1.\033[1m Passphrase \033[0m– a sequence of randomly selected words that balances security and memorability"
     )
-    print("Example: swell posing gruffly slander onto")
+    print()
+    print("Example:")
+    print("\033[1mswell posing gruffly slander onto\033[0m")
+    print()
     print()
     print(
-        "2. Alphanumeric password – a fully random string of letters and numbers, with an optional \nsymbols setting for additional complexity."
+        "2.\033[1m Alphanumeric password \033[0m– a fully random string of letters and numbers, with an optional \nsymbols setting for additional complexity."
     )
-    print("Example: a9Fq7XrL2mP8ZKcE")
+    print()
+    print("Example:")
+    print("\033[1ma9Fq7XrL2mP8ZKcE\033[0mi")
     print()
     display_generated_pass(password_type())
     print()

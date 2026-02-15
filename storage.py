@@ -21,6 +21,6 @@ def save_master_credentials(username, salt, passwordHash):
     with open(master_file, "w") as f:
         json.dump(data, f)
 
-    master_file.chmod(0o600)
+    master_file.chmod(0o600) 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

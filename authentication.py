@@ -40,7 +40,9 @@ def set_master_credentials():
             attemptsRemaining -= 1
     
     if attemptsRemaining == 0:
+        print()
         print("You are out of attempts")
+        system.exit_program()
     
     input("Press enter to continue to the main menu")
     system.clear_screen()
