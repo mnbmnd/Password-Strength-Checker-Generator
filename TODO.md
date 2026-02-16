@@ -9,14 +9,12 @@ ___
 - [ ] Add (improve) menu for passgen and passcheck
     - [x] Add an option to add symbols to alphanumeric generator
     - [x] Add an option to go back to main menu
-    - [ ] Add option to "use master password?" in passcheck menu
     - [ ] Add visual effects to entropy
     - [x] Remove "Time to crack section"
     - [ ] Add short links
 - [ ] Add "settings" to main menu
 - [ ] Add reset password functionality
-- [ ] Fix loop in setup menu after too many failed tries to match
-- [ ] Rewrite the overview section
+- [ ] Fix loop in setup menu after too many failed attempts to match
 
 
 
@@ -50,5 +48,6 @@ ___
 - [x] Add vscode workspace to ignore
 - [x] Fix quitting logic
 - [x] Fix bug in login menu logic
+- [x] Rewrite the overview section
 
 ###### END_FILE  
