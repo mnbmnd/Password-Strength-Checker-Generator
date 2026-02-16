@@ -6,20 +6,16 @@
 **Github Profile**: https://github.com/mnbmnd/
 ___
 ## Current
-- [x] Add vscode workspace to ignore
-- [x] Fix quitting logic
-- [x] Fix bug in login menu logic
 - [ ] Add (improve) menu for passgen and passcheck
-    - [ ] Add an option to add symbols to alphanumeric generator
-    - [ ] Add an option to go back to main menu
+    - [x] Add an option to add symbols to alphanumeric generator
+    - [x] Add an option to go back to main menu
     - [ ] Add option to "use master password?" in passcheck menu
     - [ ] Add visual effects to entropy
-    - [ ] Add a new section
-    - [ ] Remove "Time to crack section"
-    - [ ] Shorten links
+    - [x] Remove "Time to crack section"
+    - [ ] Add short links
 - [ ] Add "settings" to main menu
 - [ ] Add reset password functionality
-- [ ] Fix loop in setup menu
+- [ ] Fix loop in setup menu after too many failed tries to match
 - [ ] Rewrite the overview section
 
 
@@ -51,5 +47,8 @@ ___
 - [x] Rename password_generator.py to passgen.py
 - [x] Rename entropy.py to passcheck.py
 - [x] Add the overview section to the splash screen
+- [x] Add vscode workspace to ignore
+- [x] Fix quitting logic
+- [x] Fix bug in login menu logic
 
 ###### END_FILE  
