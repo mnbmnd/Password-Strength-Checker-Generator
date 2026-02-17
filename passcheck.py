@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: passcheck.py                                                          #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: passcheck.py                                                          #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -26,7 +26,7 @@ def get_uppercase_count(password):
     for i in password:
         if i.isupper():
             upperCount += 1
-            
+
     return upperCount
 
 
@@ -35,7 +35,7 @@ def get_lowercase_count(password):
     for i in password:
         if i.islower():
             lowerCount += 1
-            
+
     return lowerCount
 
 
@@ -44,7 +44,7 @@ def get_numeric_count(password):
     for i in password:
         if i.isnumeric():
             numericCount += 1
-            
+
     return numericCount
 
 
@@ -54,7 +54,7 @@ def get_symbols_count(password):
     for i in password:
         if i in symbols:
             symbolsCount += 1
-            
+
     return symbolsCount
 
 
@@ -63,10 +63,11 @@ def get_space_count(password):
     for i in password:
         if i == " ":
             spaceCount += 1
-            
+
     return spaceCount
 
 
+# Checks what characters are present in the password to evaluate entropy
 def get_character_count(password):
     characters = 0
     if get_lowercase_count(password):
@@ -89,31 +90,33 @@ def get_character_count(password):
 
 def get_entropy(password):
     passwordLength = len(password)
-    r = get_character_count(password)
-    entropy = math.log2(r**passwordLength)
+    r = get_character_count(password)  # possible characters within the password
+    entropy = math.log2(r**passwordLength)  # E = log2(R^L)
 
     return entropy
 
 
 def sample_space_size(password):
+    """Return the sample space size of the password"""
     charactersAvailable = get_character_count(password)
     n = len(password)
     sampleSpaceSize = charactersAvailable**n
-    
+
     return sampleSpaceSize
 
 
+# Corresponding strength levels for entropy ranges
 def get_strength_level(password):
     entropy = get_entropy(password)
-    
+
     strengthLevels = [
         (28, "Very Weak 🟥"),
         (36, "Weak 🟧"),
         (60, "Medium 🟨"),
         (128, "Strong 🟩"),
-        (float('inf'), "Very Strong 🟦")
+        (float("inf"), "Very Strong 🟦"),
     ]
-    
+
     for threshold, label in strengthLevels:
         if entropy < threshold:
             return label

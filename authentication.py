@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: authentication.py                                                     #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: authentication.py                                                     #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -15,6 +15,7 @@ import encrypt
 import storage
 
 
+# If the user does not have master credentials they will be taken to the setup screen
 def has_master_credentials():
     try:
         masterCredentials = get_master_credentials()
@@ -31,8 +32,9 @@ def store_master_credentials(masterCredentials):
     )
 
 
+# Password matching at the login
 def authenticate(loginPassword):
-    hashedLoginPass = hash_login_password(loginPassword)
+    hashedLoginPass = hash_login_password(loginPassword)  # Hashes inputted pass
     masterCredentials = get_master_credentials()
     if hashedLoginPass == masterCredentials["hash"]:
         return True
@@ -48,12 +50,14 @@ def hash_login_password(loginPassword):
     return encrypt.generate_hash(loginPassword, salt)
 
 
+# Retrieves master credentials from the saved json file
 def get_master_credentials():
-    master_file = Path.home() / ".password_manager/master.json"
+    master_file = Path.home() / ".passman/master.json"
     with open(master_file, "r") as f:
         return json.load(f)
 
 
+# Creates the master credentials via the setup screen, and saves them to json
 def set_master_credentials():
     username = getpass.getuser()
     password = getpass.getpass(prompt="Enter a master password\n")
@@ -75,7 +79,7 @@ def set_master_credentials():
         username,
         salt.hex(),
         passwordHash,
-    ]  # Convert the salt from bytes to hex string
+    ]  # Convert the salt from bytes to hex string for reading
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

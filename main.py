@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: main.py                                                               #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: main.py                                                               #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

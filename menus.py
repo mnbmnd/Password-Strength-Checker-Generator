@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: menus.py                                                              #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: menus.py                                                              #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -14,17 +14,18 @@ import passgen
 import system
 import authentication
 
-
 ATTEMPTS = 3
 
 
+# Ascii art to welcome
 def splash():
     print("Passman")
     overview()
     input("Press enter to continue to setup/login...")
     system.clear_screen()
-    
 
+
+# Adds titles to sections
 def section(title: str):
     print("=" * 88)
     print(f"\n\033[1m[ {title} ]\033[0m")
@@ -37,33 +38,37 @@ def section_cutter():
 def overview():
     section("Overview")
     print("\nWelcome to Passman 👋")
-    print("└► A simple to use terminal-based password utility that securely "
-          "manages your passwords\n")
+    print(
+        "└► A simple to use terminal-based password utility that securely "
+        "manages your passwords\n"
+    )
     print("Features")
     print("- Secure password generation")
-    print("- Accurate password entropy indicator")
+    print("- Accurate password strength check")
     section_cutter()
 
 
 def setup_menu():
     section("Setup")
-    print("\nTo get started, set up your master password which you will use "
-          "to login to Passman\n")
-    
+    print(
+        "\nTo get started, set up your master password which you will use "
+        "to login to Passman\n"
+    )
+
     masterCredentials = authentication.set_master_credentials()
     authentication.store_master_credentials(masterCredentials)
-    
+
     section_cutter()
     input("Press enter to continue to login screen...")
     system.clear_screen()
 
 
 def login_menu():
-    section("Login") 
+    section("Login")
 
     loginPassword = getpass.getpass("\nPassword: ")
     success = authentication.authenticate(loginPassword)
-    
+
     attemptsRemaining = 3
     while (not success) and (attemptsRemaining > 0):
         print("\nPassword incorrect")
@@ -82,7 +87,6 @@ def main_menu():
     print("\n1. Go to Passgen (Generator)")
     print("2. Go to Passcheck (Checker)")
     print("3. Quit\n")
-
 
     option = int(input("Ans: "))
 
@@ -107,63 +111,63 @@ def main_menu():
 
 def passgen_menu():
     section("Passgen")
-    
+
     print("\nPassgen generates new passwords for you using secure randomness\n")
-   
+
     print("1. Start Generator")
     print("2. Go back to main menu\n")
-    
+
     passgenChoice = int(input("Ans: "))
-    
+
     if passgenChoice == 1:
         section_cutter()
         print("Generator Started\n")
         # \033[1m\033[0m makes text bold
         print("What would you like to generate?\n")
-        print(
-            "1. A\033[1m Passphrase \033[0m– a sequence of randomly selected words"
-        )
+        print("1. A\033[1m Passphrase \033[0m– a sequence of randomly selected words")
         print("└► Example:  \033[1mswell posing gruffly slander onto\033[0m")
         print("")
         print(
             "2. A\033[1m String \033[0m– a random string of letters, numbers, and symbols"
         )
         print("└► Example:  \033[1ma9Fq7XrL2mP8ZKcEi\033[0m\n")
-        
+
         passwordType = int(input("Ans: "))
-        generatedPassword = passgen.generatePassword(passwordType)
-        
+        generatedPassword = passgen.password_generator(passwordType)
+
         print("Generated password:\033[1m", generatedPassword, "\033[0m")
         print("Entropy: {:.1f}".format(passcheck.get_entropy(generatedPassword)))
         print("Strength Level: ", passcheck.get_strength_level(generatedPassword), "\n")
-        
+
         input("Press enter to go back to main menu...")
-        
+
     system.clear_screen()
     main_menu()
 
 
 def passcheck_menu():
     section("Passcheck")
-    
-    print("\nPasscheck evaluates how long it would take to crack your password in years\n")
-    
+
+    print(
+        "\nPasscheck evaluates how long it would take to crack your password in years\n"
+    )
+
     print("1. Start Checker")
     print("2. Go back to main menu\n")
-    
+
     passcheckChoice = int(input("Ans: "))
-    
+
     if passcheckChoice == 1:
         section_cutter()
         print("Checker Started\n")
         password = input("Enter your password: ")
         print("Entropy: {:.1f}".format(passcheck.get_entropy(password)))
         print("Strength Level: ", passcheck.get_strength_level(password), "\n")
-        
+
         input("Press enter to go back to main menu...")
     system.clear_screen()
     main_menu()
-    
+
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
 # mnbmnd

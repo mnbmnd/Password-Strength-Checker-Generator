@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: passgen.py                                                            #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: passgen.py                                                            #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -12,17 +12,17 @@ import secrets
 from pathlib import Path
 
 BASE_DIR = Path(__file__).parent
-file_path = BASE_DIR / "words_alpha.txt"
+file_path = BASE_DIR / "words_alpha.txt"  # Dictionary to take words from
 
 
-def generatePassphrase(numWords):
+def generate_passphrase(numWords):
     with open(file_path) as f:
         words = [word.strip() for word in f]
         password = " ".join(secrets.choice(words) for i in range(numWords))
     return password
 
 
-def generateString(length):
+def generate_string(length):
     characters = string.ascii_letters + string.digits + string.punctuation
     while True:
         password = "".join(secrets.choice(characters) for i in range(int(length)))
@@ -35,7 +35,8 @@ def generateString(length):
     return password
 
 
-def generatePassword(mode):
+def password_generator(mode):
+    """Generates and returns a password in the form of either a string or passphrase"""
     print()
     if mode == 1:
         print("Choose the number of words for your passphrase (4-8 inclusive)")
@@ -46,7 +47,7 @@ def generatePassword(mode):
             print()
             numWords = int(input("Answer: "))
             print()
-        passphrase = generatePassphrase(numWords)
+        passphrase = generate_passphrase(numWords)  # Passphrase generator
         return passphrase
     elif mode == 2:
         print("Choose the number of characters for your password (8-32 inclusive)")
@@ -57,8 +58,8 @@ def generatePassword(mode):
             print()
             length = int(input("Answer: "))
             print()
-        stringPass = generateString(length)
-        return stringPass 
+        stringPass = generate_string(length)  # String generator
+        return stringPass
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #

@@ -1,9 +1,9 @@
 #######################################################################################
-# Author: Muneeb Mennad                                                              # 
-# Project Name: Passman                                                             #  
-# File Name: system.py                                                             #   
-# Project Start: 2026-01-24                                                         #  
-# Github: https://github.com/mnbmnd                                                  # 
+# Author: Muneeb Mennad                                                              #
+# Project Name: Passman                                                             #
+# File Name: system.py                                                             #
+# Project Start: 2026-01-24                                                         #
+# Github: https://github.com/mnbmnd                                                  #
 #######################################################################################
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
@@ -14,14 +14,18 @@ def clear_screen():
     subprocess.run(["clear"])
 
 
+# Exits program and clears the screen
 def exit():
     subprocess.run(["reset"])
-    
 
+
+# Gets system username
 def whoami():
     whoami = subprocess.run(["whoami"], capture_output=True, text=True)
-    
-    return whoami.stdout.replace("\n", "") # Returns output of whoami without the newline chr
+
+    return whoami.stdout.replace(
+        "\n", ""
+    )  # Returns output of whoami without the newline chr
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
