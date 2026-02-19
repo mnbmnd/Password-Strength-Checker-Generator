@@ -39,18 +39,23 @@ def run_program():
             elif choice == 3:
                 confirmed = int(input("Enter 1 to confirm: "))
                 if confirmed:
-                    system.exit()
+                    system.reset()
+                    menus.show_goodbye()
                     break
                 else:
                     continue
     else:
         print("\nLogin Unsuccessful")
         input("\nPress enter to exit... ")
-        system.exit()
+        system.reset()
 
 
 if __name__ == "__main__":
-    run_program()
+    try:
+        run_program()
+    except KeyboardInterrupt: # Turn this into a more generic "except Exception" later
+        system.reset()
+        menus.show_goodbye()
 
 
 # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ #
