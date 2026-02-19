@@ -1,11 +1,6 @@
-##!/usr/bin/env fish
-#
-#set SCRIPT_DIR (dirname (realpath (status -f)))
-#
-#python3 $SCRIPT_DIR/main.py $argv
+#!/usr/bin/env fish
 
-#!/usr/bin/env sh
+set SCRIPT_DIR (dirname (realpath (status -f)))
 
-SCRIPT_DIR="$(dirname "$(realpath "$0")")"
+python3 $SCRIPT_DIR/main.py $argv
 
-python3 "$SCRIPT_DIR/main.py" "$@"
